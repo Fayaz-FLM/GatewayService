@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: AppointmentManagement
+              uri: lb://APPOINTMENTMANAGEMENT
+              predicates:
+                - Path=/appointments/**
+
+            - id: BedManagement
+              uri: lb://BEDMANAGEMENT
+              predicates:
+                - Path=/bed/**,/rooms/**
+
+            - id: PatientManagement
+              uri: lb://PATIENTMANAGEMENT
+              predicates:
+                - Path=/patients/**
+
+            - id: StaffService
+              uri: lb://STAFFSERVICE
+              predicates:
+                - Path=/staff/**,/doctorSchedule/**
+
+server:
+  port: 8000
